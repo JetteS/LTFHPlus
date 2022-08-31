@@ -257,7 +257,7 @@ estimate_liability_single <- function(.tbl = NULL,
     # be set to -Inf (lower threshold) and Inf (upper 
     # threshold)
     
-    if(setdiff(c("g","o"), pull(temp_tbl, !!as.symbol(role))) == "g") {
+    if(setequal(setdiff(c("g","o"), pull(temp_tbl, !!as.symbol(role))),c("g"))) {
       
       if("o" %in% pull(temp_tbl, !!as.symbol(role))) i_pid <- pull(filter(temp_tbl, !!as.symbol(role)== "o"), !!as.symbol(pid))
       if(!"o" %in% pull(temp_tbl, !!as.symbol(role))) i_pid <- paste0(pull(temp_tbl, !!as.symbol(fam_id))[1], "_g")
@@ -268,7 +268,7 @@ estimate_liability_single <- function(.tbl = NULL,
                                            lower = -Inf, 
                                            upper = Inf), 
                             temp_tbl)
-    }else if(setdiff(c("g","o"), pull(temp_tbl, !!as.symbol(role))) == "o"){
+    }else if(setequal(setdiff(c("g","o"), pull(temp_tbl, !!as.symbol(role))), c("o"))){
       
       if("g" %in% pull(temp_tbl, !!as.symbol(role))) i_pid <- pull(filter(temp_tbl, !!as.symbol(role)== "g"), !!as.symbol(pid))
       if(!"g" %in% pull(temp_tbl, !!as.symbol(role))) i_pid <- paste0(pull(temp_tbl, !!as.symbol(fam_id))[1], "_o")
@@ -279,7 +279,7 @@ estimate_liability_single <- function(.tbl = NULL,
                                            lower = -Inf, 
                                            upper = Inf), 
                             temp_tbl)
-    }else if(sort(setdiff(c("g","o"), pull(temp_tbl, !!as.symbol(role)))) == c("g","o")){
+    }else if(setqual(setdiff(c("g","o"), pull(temp_tbl, !!as.symbol(role))), c("g","o"))){
       
       i_pid <- pull(temp_tbl, !!as.symbol(fam_id))[1]
       
