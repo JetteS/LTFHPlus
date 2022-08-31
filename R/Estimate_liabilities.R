@@ -649,7 +649,7 @@ The lower and upper thresholds will be swapped...")
     # be set to -Inf (lower threshold) and Inf (upper 
     # threshold)
     
-    if(setdiff(c("g","o"), pull(temp_tbl, !!as.symbol(role))) == "g") {
+    if(setequal(setdiff(c("g","o"), pull(temp_tbl, !!as.symbol(role))), c("g"))) {
       
       if("o" %in% pull(temp_tbl, !!as.symbol(role))) i_pid <- pull(filter(temp_tbl, !!as.symbol(role)== "o"), !!as.symbol(pid))
       if(!"o" %in% pull(temp_tbl, !!as.symbol(role))) i_pid <- paste0(pull(temp_tbl, !!as.symbol(fam_id))[1], "_g")
@@ -659,7 +659,7 @@ The lower and upper thresholds will be swapped...")
                                                      !!as.symbol(role) := "g"),
                                       tibble::tibble(!!!c(stats::setNames(rep(-Inf, n_pheno), paste0("lower_", phen_names)), stats::setNames(rep(Inf, n_pheno), paste0("upper_", phen_names))))), 
                             temp_tbl)
-    }else if(setdiff(c("g","o"), pull(temp_tbl, !!as.symbol(role))) == "o"){
+    }else if(setequal(setdiff(c("g","o"), pull(temp_tbl, !!as.symbol(role))), c("o"))){
       
       if("g" %in% pull(temp_tbl, !!as.symbol(role))) i_pid <- pull(filter(temp_tbl, !!as.symbol(role)== "g"), !!as.symbol(pid))
       if(!"g" %in% pull(temp_tbl, !!as.symbol(role))) i_pid <- paste0(pull(temp_tbl, !!as.symbol(fam_id))[1], "_o")
@@ -669,7 +669,7 @@ The lower and upper thresholds will be swapped...")
                                                      !!as.symbol(role) := "o"),
                                       tibble::tibble(!!!c(stats::setNames(rep(-Inf, n_pheno), paste0("lower_", phen_names)), stats::setNames(rep(Inf, n_pheno), paste0("upper_", phen_names))))), 
                             temp_tbl)
-    }else if(sort(setdiff(c("g","o"), pull(temp_tbl, !!as.symbol(role)))) == c("g","o")){
+    }else if(setequal(setdiff(c("g","o"), pull(temp_tbl, !!as.symbol(role))), c("g","o"))){
       
       i_pid <- pull(temp_tbl, !!as.symbol(fam_id))[1]
       
